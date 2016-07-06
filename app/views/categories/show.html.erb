@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @category.desc %>
+</p>
+
+<p>
+  <strong>Is private:</strong>
+  <%= @category.is_private %>
+</p>
+
+<p>
+  <strong>Is writable:</strong>
+  <%= @category.is_writable %>
+</p>
+
+<p>
+  <strong>Is featured:</strong>
+  <%= @category.is_featured %>
+</p>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
