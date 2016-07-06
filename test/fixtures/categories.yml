@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  desc: MyText
+  is_private: false
+  is_writable: false
+  is_featured: false
+
+two:
+  name: MyString
+  desc: MyText
+  is_private: false
+  is_writable: false
+  is_featured: false
