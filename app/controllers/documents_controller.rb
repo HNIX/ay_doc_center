@@ -29,6 +29,7 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = Document.new(document_params)
+    @document.user = current_user
 
     respond_to do |format|
       if @document.save
