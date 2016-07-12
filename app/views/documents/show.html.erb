@@ -1,30 +1,265 @@
 <%- model_class = Document -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => Document %></h1>
-</div>
 
-<div class="fieldset">
-  <dl>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
-      <dd><pre class="prettyprint"><%= @document.name %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:desc) %></dt>
-      <dd><pre class="prettyprint"><%= @document.desc %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:is_private) %></dt>
-      <dd><pre class="prettyprint"><%= @document.is_private %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:is_writable) %></dt>
-      <dd><pre class="prettyprint"><%= @document.is_writable %></pre></dd>
-  </dl>
-</div>
-
-<div class="form-group">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              documents_path, :class => 'btn btn-default'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_document_path(@document), :class => 'btn btn-default' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              document_path(@document),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
-
+<div class="page-content-container">
+  <div class="page-content-row">
+      <div class="page-content-col">
+          <!-- BEGIN PAGE BASE CONTENT -->
+          <div class="profile">
+              <div class="tabbable-line tabbable-full-width">
+                  <ul class="nav nav-tabs">
+                      <li class="active">
+                          <a href="#tab_1_1" data-toggle="tab"> Overview </a>
+                      </li>
+                      <li>
+                          <a href="#tab_1_6" data-toggle="tab"> Help </a>
+                      </li>
+                      <li>
+                          <a href="#tab_1_2" data-toggle="tab"> Admin </a>
+                      </li>
+                  </ul>
+                  <div class="tab-content">
+                      <div class="tab-pane active" id="tab_1_1">
+                          <div class="row">
+                              <div class="col-md-3">
+                                  <ul class="list-unstyled profile-nav">
+                                      <% if @document.attachment? %>
+                                        <li>
+                                            <%= image_tag @document.attachment.thumb.url, class:"img-responsive pic-bordered" %>
+                                        </li>
+                                      <% end %>
+                                      <li>
+                                        <%= link_to "Download PDF", @document.attachment_url, class:"btn blue" if @document.attachment? %>
+                                      </li>
+                                      <li>
+                                         <%= link_to "Download Word", @document.word_url, class:"btn" if @document.word? %>
+                                      </li>
+                                      <li>
+                                          <%= link_to "Download PowerPoint", @document.ppt_url, class:"btn" if @document.ppt? %>
+                                      </li>
+                                  </ul>
+                              </div>
+                              <div class="col-md-9">
+                                  <div class="row">
+                                      <div class="col-md-8 profile-info">
+                                          <h1 class="font-green sbold uppercase"><%= @document.name %></h1>
+                                          <p> <%= @document.desc %> </p>
+                                          <ul class="list-inline">
+                                              <li>
+                                                  <i class="fa fa-map-marker"></i> <%= @document.category.name %> </li>
+                                              <li>
+                                                  <i class="fa fa-calendar"></i> <%= @document.created_at %> </li>
+                                              <li>
+                                                  <i class="fa fa-briefcase"></i> Timeline </li>
+                                              <li>
+                                                  <i class="fa fa-star"></i> Top Seller </li>
+                                          </ul>
+                                      </div>
+                                      <!--end col-md-8-->
+                                      <div class="col-md-4">
+                                          <div class="portlet sale-summary">
+                                              <div class="portlet-title">
+                                                  <div class="caption font-red sbold"> Document Summary </div>
+                                                  <div class="tools">
+                                                      <a class="reload" href="javascript:;"> </a>
+                                                  </div>
+                                              </div>
+                                              <div class="portlet-body">
+                                                  <ul class="list-unstyled">
+                                                      <li>
+                                                          <span class="sale-info"> Total Downloads
+                                                              <i class="fa fa-img-up"></i>
+                                                          </span>
+                                                          <span class="sale-num"> 23 </span>
+                                                      </li>
+                                                      <li>
+                                                          <span class="sale-info"> Total Pages
+                                                              <i class="fa fa-img-down"></i>
+                                                          </span>
+                                                          <span class="sale-num"> 87 </span>
+                                                      </li>
+                                                      <li>
+                                                          <span class="sale-info"> Time </span>
+                                                          <span class="sale-num"> 7 </span>
+                                                      </li>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <!--end col-md-4-->
+                                  </div>
+                                  <!--end row-->
+                              </div>
+                          </div>
+                      </div>
+                      <div class="tab-pane" id="tab_1_2">
+                          <div class="row">
+                              <div class="col-md-3">
+                                  <ul class="list-unstyled profile-nav">
+                                      <% if @document.attachment? %>
+                                        <li>
+                                            <%= image_tag @document.attachment.thumb.url, class:"img-responsive pic-bordered" %>
+                                        </li>
+                                      <% end %>
+                                      <li>
+                                        <%= link_to "Edit", edit_document_path, :class => 'btn blue' %>
+                                      </li>
+                                      <li>
+                                         <%= link_to 'Destroy',  @document, class:'btn default btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="tab-pane" id="tab_1_6">
+                          <div class="row">
+                              <div class="col-md-2">
+                                  <ul class="ver-inline-menu tabbable margin-bottom-10">
+                                      <li class="active">
+                                          <a data-toggle="tab" href="#tab_1">
+                                              General Questions </a>
+                                          <span class="after"> </span>
+                                      </li>
+                                      <li>
+                                          <a data-toggle="tab" href="#tab_2">
+                                              Templates </a>
+                                      </li>
+                                      <li>
+                                          <a data-toggle="tab" href="#tab_3">
+                                              Useage </a>
+                                      </li>
+                                  </ul>
+                              </div>
+                              <div class="col-md-10">
+                                  <div class="tab-content">
+                                      <div id="tab_1" class="tab-pane active">
+                                          <div id="accordion1" class="panel-group">
+                                              <div class="panel panel-default">
+                                                  <div class="panel-heading">
+                                                      <h4 class="panel-title">
+                                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_1"> 1. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ? </a>
+                                                      </h4>
+                                                  </div>
+                                                  <div id="accordion1_1" class="panel-collapse collapse in">
+                                                      <div class="panel-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
+                                                          nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+                                                          craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
+                                                          nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </div>
+                                                  </div>
+                                              </div>
+                                              <div class="panel panel-default">
+                                                  <div class="panel-heading">
+                                                      <h4 class="panel-title">
+                                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_2"> 2. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ? </a>
+                                                      </h4>
+                                                  </div>
+                                                  <div id="accordion1_2" class="panel-collapse collapse">
+                                                      <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Anim pariatur cliche
+                                                          reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                                                          eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                                          wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+                                                          haven't heard of them accusamus labore sustainable VHS. </div>
+                                                  </div>
+                                              </div>
+                                              <div class="panel panel-success">
+                                                  <div class="panel-heading">
+                                                      <h4 class="panel-title">
+                                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_3"> 3. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor ? </a>
+                                                      </h4>
+                                                  </div>
+                                                  <div id="accordion1_3" class="panel-collapse collapse">
+                                                      <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Anim pariatur cliche
+                                                          reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                                                          eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                                          wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+                                                          haven't heard of them accusamus labore sustainable VHS. </div>
+                                                  </div>
+                                              </div>   
+                                          </div>
+                                      </div>
+                                      <div id="tab_2" class="tab-pane">
+                                          <div id="accordion2" class="panel-group">
+                                              <div class="panel panel-warning">
+                                                  <div class="panel-heading">
+                                                      <h4 class="panel-title">
+                                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#accordion2_1"> 1. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ? </a>
+                                                      </h4>
+                                                  </div>
+                                                  <div id="accordion2_1" class="panel-collapse collapse in">
+                                                      <div class="panel-body">
+                                                          <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
+                                                              quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                              helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                                                              aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </p>
+                                                          <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
+                                                              quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                              helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                                                              aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="panel panel-danger">
+                                                  <div class="panel-heading">
+                                                      <h4 class="panel-title">
+                                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#accordion2_2"> 2. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ? </a>
+                                                      </h4>
+                                                  </div>
+                                                  <div id="accordion2_2" class="panel-collapse collapse">
+                                                      <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Anim pariatur cliche
+                                                          reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                                                          eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                                          wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+                                                          haven't heard of them accusamus labore sustainable VHS. </div>
+                                                  </div>
+                                              </div>
+                                              
+                                              
+                                          </div>
+                                      </div>
+                                      <div id="tab_3" class="tab-pane">
+                                          <div id="accordion3" class="panel-group">
+                                              <div class="panel panel-danger">
+                                                  <div class="panel-heading">
+                                                      <h4 class="panel-title">
+                                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#accordion3_1"> 1. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ? </a>
+                                                      </h4>
+                                                  </div>
+                                                  <div id="accordion3_1" class="panel-collapse collapse in">
+                                                      <div class="panel-body">
+                                                          <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
+                                                              quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. </p>
+                                                          <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
+                                                              quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. </p>
+                                                          <p> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                              helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                                                              aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="panel panel-success">
+                                                  <div class="panel-heading">
+                                                      <h4 class="panel-title">
+                                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#accordion3_2"> 2. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ? </a>
+                                                      </h4>
+                                                  </div>
+                                                  <div id="accordion3_2" class="panel-collapse collapse">
+                                                      <div class="panel-body"> Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Anim pariatur cliche
+                                                          reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                                                          eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                                          wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+                                                          haven't heard of them accusamus labore sustainable VHS. </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <!--end tab-pane-->
+                  </div>
+                                    </div>
+                                </div>
+                                <!-- END PAGE BASE CONTENT -->
+                            </div>
+                        </div>
+                    </div>

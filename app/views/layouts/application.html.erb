@@ -6,13 +6,20 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 <!-- Prelang: Analytics / Google Analytics -->
-    <%= analytics_init if Rails.env.production? or Rails.env.development? %><meta name="viewport" content="width=device-width, initial-scale=1"/></head>
-<body>
-<%= render partial: "elements/navbar" %>
-<%= bootstrap_flash %>
+  <%= analytics_init if Rails.env.production? or Rails.env.development? %><meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo">
+  <!-- BEGIN CONTAINER -->
+  <div class="wrapper">
+    <%= render partial: "elements/navbar" %>
+    <div class="container-fluid">
+      <div class="page-content">
+      	<%= bootstrap_flash %>
 
-
-<%= yield %>
-
+      	<%= yield %>
+			</div>
+      <%= render partial: "elements/footer" %>
+    </div>
+  </div>
 </body>
 </html>

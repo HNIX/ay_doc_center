@@ -1,2 +1,277 @@
-<h1>Landings#index</h1>
-<p>Find me in app/views/landings/index.html.erb</p>
+<!-- BEGIN BREADCRUMBS -->
+<div class="breadcrumbs">
+    <h1>Dashboard</h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">Home</a>
+        </li>
+        <li class="active">Dashboard</li>
+    </ol>
+</div>
+<!-- END BREADCRUMBS -->
+<!-- BEGIN PAGE BASE CONTENT -->
+<!-- BEGIN DASHBOARD STATS 1-->
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+            <div class="visual">
+                <i class="fa fa-comments"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="1349">0</span> SF
+                </div>
+                <div class="desc"> SF Leased </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+            <div class="visual">
+                <i class="fa fa-bar-chart-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="12,5">0</span> M$ </div>
+                <div class="desc"> Total Profit </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+            <div class="visual">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="549">0</span>
+                </div>
+                <div class="desc"> Deals </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+            <div class="visual">
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+                <div class="number"> +
+                    <span data-counter="counterup" data-value="89"></span>% </div>
+                <div class="desc"> Something </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="clearfix"></div>
+<!-- END DASHBOARD STATS 1-->
+<div class="row">
+      <div class="col-md-6 col-sm-6">
+        <!-- BEGIN PORTLET-->
+                        <div class="portlet light portlet-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-microphone font-dark hide"></i>
+                    <span class="caption-subject bold font-dark uppercase"> Recent Templates</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="mt-element-card mt-element-overlay">
+                  <div class="row">
+                    <% @documents.each do |doc| %>
+                      <div class="col-md-4">
+                        <div class="mt-card-item">
+                          <div class="mt-card-content">
+                              <h3 class="mt-card-name"><%= doc.name %></h3>
+                          </div>
+                          <div class="mt-card-avatar mt-overlay-1">
+                              <%= image_tag(doc.attachment.small_thumb.url) if doc.attachment? %>
+                              <div class="mt-overlay">
+                                  <ul class="mt-info">
+                                      <li>
+                                          <a class="btn blue" data-toggle="modal" href="#responsive<%= doc.id %>">
+                                              View
+                                          </a>
+                                      </li>
+                                      <li>
+                                          <a href="<%= document_path(doc) %>" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">Info</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="responsive<%= doc.id %>" class="modal fade" tabindex="-1" data-width="760">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Responsive</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div id="<%= no_spaces(doc.name) %><%= doc.id %>" class="col-md-6">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <%= link_to "Download PowerPoint", doc.ppt_url, class:"btn btn-outline dark" if doc.ppt? %>
+                            <%= link_to "Download Word", doc.word_url, class:"btn btn-outline dark" if doc.word? %>
+                            <%= link_to "Download PDF", doc.attachment_url, class:"btn btn-outline dark" if doc.attachment? %>
+                            <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
+                            <%= link_to "More Information", document_path(doc), class:"btn green" if doc.attachment? %>
+                        </div>
+                      </div>
+                      <script>PDFObject.embed("<%= doc.attachment.url %>", "#<%= no_spaces(doc.name) %><%= doc.id %>");</script>
+                    <% end %>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-share font-dark hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">Recent Activities</span>
+                </div>
+                <div class="actions">
+                    <div class="btn-group">
+                        <a class="btn btn-sm blue btn-outline btn-circle" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Filter By
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <div class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+                            <label class="mt-checkbox mt-checkbox-outline">
+                                <input type="checkbox" /> Finance
+                                <span></span>
+                            </label>
+                            <label class="mt-checkbox mt-checkbox-outline">
+                                <input type="checkbox" checked="" /> Membership
+                                <span></span>
+                            </label>
+                            <label class="mt-checkbox mt-checkbox-outline">
+                                <input type="checkbox" /> Customer Support
+                                <span></span>
+                            </label>
+                            <label class="mt-checkbox mt-checkbox-outline">
+                                <input type="checkbox" checked="" /> HR
+                                <span></span>
+                            </label>
+                            <label class="mt-checkbox mt-checkbox-outline">
+                                <input type="checkbox" /> System
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                    <ul class="feeds">
+                        <li>
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc"> New flyer template has been added.
+                                            <span class="label label-sm label-warning "> View
+                                                <i class="fa fa-share"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date"> Just now </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label label-sm label-success">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cont-col2">
+                                            <div class="desc"> Market Report for 2Q2016 has been released. </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col2">
+                                    <div class="date"> 20 mins </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-danger">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc"> You have 5 pending membership that requires a quick review. </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date"> 24 mins </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc"> New order received with
+                                            <span class="label label-sm label-success"> Reference Number: DR23923 </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date"> 30 mins </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-success">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc"> You have 5 pending membership that requires a quick review. </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date"> 24 mins </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="scroller-footer">
+                    <div class="btn-arrow-link pull-right">
+                        <a href="javascript:;">See All Records</a>
+                        <i class="icon-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE BASE CONTENT -->

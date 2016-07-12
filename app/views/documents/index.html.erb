@@ -31,6 +31,7 @@
           <%= link_to document_path(document), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
             <%= glyph 'remove' %>
           <%- end -%>
+          <%= link_to "Download Docuemnt", document.attachment_url if document.attachment %>
         </td>
       </tr>
     <% end %>

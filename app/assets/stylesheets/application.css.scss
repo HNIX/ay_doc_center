@@ -35,3 +35,18 @@
 .form-user {
   max-width: 450px;
 }
+
+.pdfobject-container { height: 500px; width: 750px;}
+.pdfobject { border: 1px solid #666; }
+
+@import "plugins/bootstrap-daterangepicker/daterangepicker.min";
+@import "plugins/morris/morris";
+@import "plugins/fullcalendar/fullcalendar.min";
+@import "plugins/jqvmap/jqvmap/jqvmap";
+@import "components.min";
+@import "plugins.min";
+@import "layout.min";
+@import "custom.min";
+@import "plugins/bootstrap-modal/css/bootstrap-modal-bs3patch";
+@import "plugins/bootstrap-modal/css/bootstrap-modal";
+@import "profile-2.min";

@@ -54,6 +54,9 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'tzinfo-data'
 gem 'validates_formatting_of'
+gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
+gem 'rmagick'
+
 
 group :development, :test do
   gem 'dotenv-rails'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706204723) do
+ActiveRecord::Schema.define(version: 20160708030637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 20160706204723) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "attachment"
+    t.string   "word"
+    t.string   "ppt"
   end
 
   add_index "documents", ["category_id"], name: "index_documents_on_category_id", using: :btree

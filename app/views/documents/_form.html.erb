@@ -12,16 +12,48 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :is_private, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.check_box :is_private, :class => 'text-field form-control' %>
+    <%= f.label :category_id, class: 'col-md-3 control-label' %>
+    <div class="col-md-4">
+      <%= f.collection_select :category_id, Category.all, :id, :name, prompt:"Select Category" %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :is_writable, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.check_box :is_writable, :class => 'text-field form-control' %>
+    <%= f.label "PDF", class: 'col-md-3 control-label' %>
+    <div class="col-md-4">
+      <%= f.file_field :attachment, :class => 'text-field form-control' %>
     </div>
+    <label>
+      <% if @document.attachment? %>
+        <%= f.check_box :remove_attachment %>
+        Remove PDF
+      <% end %>
+    </label>
+  </div>
+  <div class="form-group">
+    <%= f.label "Word File", class: 'col-md-3 control-label' %>
+    <div class="col-md-4">
+      <%= f.file_field :word, :class => 'text-field form-control' %>
+      <%= f.hidden_field :word_cache %>
+    </div>
+    <label>
+      <% if @document.word? %>
+        <%= f.check_box :remove_word %>
+        Remove Word Document
+      <% end %>
+    </label>
+  </div>
+  <div class="form-group">
+    <%= f.label "PowerPoint File", class: 'col-md-3 control-label' %>
+    <div class="col-md-4">
+      <%= f.file_field :ppt, :class => 'text-field form-control' %>
+      <%= f.hidden_field :ppt_cache %>
+    </div>
+    <label>
+      <% if @document.ppt? %>
+        <%= f.check_box :remove_ppt %>
+        Remove PowerPoint File
+      <% end %>
+    </label>
   </div>
 
   <div class="form-group">
