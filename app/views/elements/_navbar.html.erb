@@ -73,28 +73,31 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown dropdown-fw  <%= 'active open selected' if params[:controller] == 'categories' && params[:action] != 'new' || params[:controller] == 'documents' && params[:action] != 'new' %>">
-                        <a href="javascript:;" class="text-uppercase">
-                            Templates</a>
-                        <ul class="dropdown-menu dropdown-menu-fw">
-                            <% @categories.each do |cat| %>
-                                <% if cat.is_root? %>
-                                    <li class="dropdown <%= 'more-dropdown-sub' if cat.has_children? %>">
-                                       <%= link_to cat.name, category_path(cat) %>
-                                       <% if cat.has_children? %>
-                                         <ul class="dropdown-menu">
-                                            <% cat.children.each do |sub| %>
+                    <% @categories.each do |cat| %>
+                        <% if cat.is_root? %>
+                            <li class="dropdown dropdown-fw  <%= active_nav(cat) %>">
+                              <%= link_to cat.name, "#", class: "text-uppercase" %>
+                              <% if cat.has_children? %>
+                                <ul class="dropdown-menu dropdown-menu-fw">
+                                    <% cat.children.each do |sub| %>
+                                      <li class="dropdown <%= 'more-dropdown-sub' if sub.has_children? %>">
+                                        <%= link_to sub.name, category_path(sub) %>
+                                          <% if sub.has_children? %>
+                                            <ul class="dropdown-menu">
+                                              <% sub.children.each do |subsub| %>
                                                 <li>
-                                                  <%= link_to sub.name, category_path(sub) %>
+                                                  <%= link_to subsub.name, category_path(subsub) %>
                                                 </li>
-                                            <% end %>
-                                          </ul>
-                                       <% end %>
-                                    </li>
-                                <% end %>
-                            <% end %>
-                        </ul>
-                    </li>
+                                              <% end %>
+                                            </ul>
+                                        <% end %>
+                                      </li>
+                                    <% end %>
+                                </ul>
+                              <% end %>
+                            </li>
+                        <% end %>
+                    <% end %>
                     <li class="dropdown dropdown-fw  ">
                         <a href="javascript:;" class="text-uppercase">
                             Directory</a>
