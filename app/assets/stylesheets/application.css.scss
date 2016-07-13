@@ -50,3 +50,16 @@
 @import "plugins/bootstrap-modal/css/bootstrap-modal-bs3patch";
 @import "plugins/bootstrap-modal/css/bootstrap-modal";
 @import "profile-2.min";
+@import "plugins/jquery-nestable/jquery.nestable";
+
+
+.dd-handle {
+	height: 42px;
+	cursor: pointer;
+}
+
+.page-header .navbar .navbar-nav > li > a {
+	font-size: 15px;
+	padding: 22px 20px;
+}
+

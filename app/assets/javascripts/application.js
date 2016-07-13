@@ -58,4 +58,7 @@
 //= require plugins/bootstrap-modal/js/bootstrap-modal
 //= require ui-extended-modals.min
 //= require plugins/PDFObject/pdfobject
+//= require plugins/jquery-nestable/jquery.nestable
+//= require ui-nestable.min
 //= require_tree .
+
