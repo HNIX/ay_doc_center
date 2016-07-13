@@ -56,7 +56,7 @@ gem 'tzinfo-data'
 gem 'validates_formatting_of'
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
 gem 'rmagick'
-
+gem 'ancestry'
 
 group :development, :test do
   gem 'dotenv-rails'

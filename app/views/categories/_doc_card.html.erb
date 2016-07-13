@@ -1,0 +1,43 @@
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="mt-card-item">
+          <div class="mt-card-avatar mt-overlay-1">
+              <%= image_tag(doc.attachment.thumb.url) if doc.attachment? %>
+              <div class="mt-overlay">
+                  <ul class="mt-info">
+                      <li>
+                          <a class="btn blue" data-toggle="modal" href="#responsive<%= doc.id %>">
+                              View
+                          </a>
+                      </li>
+                      <li>
+                          <a href="<%= document_path(doc) %>" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">Info</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <div class="mt-card-content">
+              <h3 class="mt-card-name"><%= doc.name %></h3>
+          </div>
+      </div>
+  </div>
+  <div id="responsive<%= doc.id %>" class="modal fade" tabindex="-1" data-width="760">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Responsive</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div id="<%= no_spaces(doc.name) %><%= doc.id %>" class="col-md-6">
+                
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <%= link_to "Download PowerPoint", doc.ppt_url, class:"btn btn-outline dark" if doc.ppt? %>
+        <%= link_to "Download Word", doc.word_url, class:"btn btn-outline dark" if doc.word? %>
+        <%= link_to "Download PDF", doc.attachment_url, class:"btn btn-outline dark" if doc.attachment? %>
+        <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
+        <%= link_to "More Information", document_path(doc), class:"btn green" if doc.attachment? %>
+    </div>
+</div>
+<script>PDFObject.embed("<%= doc.attachment.url %>", "#<%= no_spaces(doc.name) %><%= doc.id %>");</script>

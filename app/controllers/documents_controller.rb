@@ -19,10 +19,12 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    @categories_doc = ancestry_options(Category.where(nil).arrange(:order => 'name')) {|i| "#{'-' * i.depth} #{i.name}" }
   end
 
   # GET /documents/1/edit
   def edit
+    @categories_doc = ancestry_options(Category.where(nil).arrange(:order => 'name')) {|i| "#{'-' * i.depth} #{i.name}" }
   end
 
   # POST /documents
@@ -87,6 +89,18 @@ class DocumentsController < ApplicationController
 
 
   private
+
+    def ancestry_options(items, &block)
+      return ancestry_options(items){ |i| "#{'-' * i.depth} #{i.name}" } unless block_given?
+
+      result = []
+      items.map do |item, sub_items|
+        result << [yield(item), item.id]
+        #this is a recursive call:
+        result += ancestry_options(sub_items, &block)
+      end
+      result
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_document
       @document = Document.find(params[:id])

@@ -77,10 +77,21 @@
                         <a href="javascript:;" class="text-uppercase">
                             Templates</a>
                         <ul class="dropdown-menu dropdown-menu-fw">
-                            <% @categories.each do |c| %>
-                                <li>
-                                    <%= link_to c.name, category_path(c) %>
-                                </li>
+                            <% @categories.each do |cat| %>
+                                <% if cat.is_root? %>
+                                    <li class="dropdown <%= 'more-dropdown-sub' if cat.has_children? %>">
+                                       <%= link_to cat.name, category_path(cat) %>
+                                       <% if cat.has_children? %>
+                                         <ul class="dropdown-menu">
+                                            <% cat.children.each do |sub| %>
+                                                <li>
+                                                  <%= link_to sub.name, category_path(sub) %>
+                                                </li>
+                                            <% end %>
+                                          </ul>
+                                       <% end %>
+                                    </li>
+                                <% end %>
                             <% end %>
                         </ul>
                     </li>

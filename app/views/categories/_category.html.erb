@@ -1,0 +1,12 @@
+<tr>
+  <td><%= category.id %></td>
+  <td><%= link_to category.name, category_path(category) %></td>
+  <td><%= category.desc %></td>
+  <td><%= category.parent.name if category.parent %>
+  <td><%=l category.created_at, format: :long %></td>
+  <td>
+    <%= link_to "Edit", edit_category_path(category), class: "btn green" %>
+    <%= link_to "Delete", category_path(category), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class: "btn btn-danger" %>
+    <%= link_to "New Subcategory", new_category_path(parent_id: category) %>
+  </td>
+</tr>

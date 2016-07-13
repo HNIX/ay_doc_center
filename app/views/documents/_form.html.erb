@@ -14,7 +14,7 @@
   <div class="form-group">
     <%= f.label :category_id, class: 'col-md-3 control-label' %>
     <div class="col-md-4">
-      <%= f.collection_select :category_id, Category.all, :id, :name, prompt:"Select Category" %>
+      <%= f.select :category_id, @categories_doc %>
     </div>
   </div>
   <div class="form-group">
@@ -22,12 +22,12 @@
     <div class="col-md-4">
       <%= f.file_field :attachment, :class => 'text-field form-control' %>
     </div>
-    <label>
-      <% if @document.attachment? %>
+    <div class="col-md-5">
+      <% if @document.attachment? %> 
         <%= f.check_box :remove_attachment %>
-        Remove PDF
+        Remove <%= truncate @document.attachment.file.filename, length: 30 %>
       <% end %>
-    </label>
+    </div>
   </div>
   <div class="form-group">
     <%= f.label "Word File", class: 'col-md-3 control-label' %>
@@ -35,12 +35,12 @@
       <%= f.file_field :word, :class => 'text-field form-control' %>
       <%= f.hidden_field :word_cache %>
     </div>
-    <label>
-      <% if @document.word? %>
+    <div class="col-md-5">
+      <% if @document.word? %> 
         <%= f.check_box :remove_word %>
-        Remove Word Document
+        Remove <%= truncate @document.word.file.filename, length: 30 %>
       <% end %>
-    </label>
+    </div>
   </div>
   <div class="form-group">
     <%= f.label "PowerPoint File", class: 'col-md-3 control-label' %>
@@ -48,12 +48,12 @@
       <%= f.file_field :ppt, :class => 'text-field form-control' %>
       <%= f.hidden_field :ppt_cache %>
     </div>
-    <label>
-      <% if @document.ppt? %>
+    <div class="col-md-5">
+      <% if @document.ppt? %> 
         <%= f.check_box :remove_ppt %>
-        Remove PowerPoint File
+        Remove <%= truncate @document.ppt.file.filename, length: 30 %>
       <% end %>
-    </label>
+    </div>
   </div>
 
   <div class="form-group">

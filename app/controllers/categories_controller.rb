@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
-    @category = Category.new
+    @category = Category.new(:parent_id => params[:parent_id])
   end
 
   # GET /categories/1/edit
@@ -69,6 +69,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name, :desc, :is_private, :is_writable, :is_featured)
+      params.require(:category).permit(:name, :desc, :is_private, :is_writable, :is_featured, :parent_id)
     end
 end
