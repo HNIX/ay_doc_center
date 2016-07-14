@@ -71,6 +71,12 @@
                                 <a href="dashboard_3.html">
                                     </i>Company News</a>
                             </li>
+                            <li>
+                              <%= link_to "Directory", users_path %>
+                            </li>
+                            <li>
+                              <%= link_to "Admin", user_path(current_user) %>
+                            </li>
                         </ul>
                     </li>
                     <% @categories.each do |cat| %>
@@ -98,33 +104,6 @@
                             </li>
                         <% end %>
                     <% end %>
-                    <li class="dropdown dropdown-fw  ">
-                        <a href="javascript:;" class="text-uppercase">
-                            Directory</a>
-                        <ul class="dropdown-menu dropdown-menu-fw">
-                            <li>
-                                <a href="#">Nashville</a>
-                            </li>
-                            <li>
-                                <a href="#">Knoxville</a>
-                            </li>
-                            <li>
-                                <a href="#">Memphis</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown dropdown-fw  <%= 'active open selected' if params[:controller] == 'documents' && params[:action] == 'new' || params[:controller] == 'categories' && params[:action] == 'new'%>">
-                        <a href="javascript:;" class="text-uppercase">
-                            Admin</a>
-                        <ul class="dropdown-menu dropdown-menu-fw">
-                            <li>
-                                <%= link_to "New Document", new_document_path %>
-                            </li>
-                            <li>
-                                <%= link_to "New Category", new_category_path %>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
             <!-- END HEADER MENU -->
