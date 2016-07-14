@@ -1,10 +1,15 @@
 <div class="dd-handle"> 
     <h5 class="col-md-5"><%= truncate(category.name, length:20) %></h5>
     <div class="pull-right col-md-6">
-        <%= link_to "Edit", edit_category_path(category), class:"btn btn-sm blue pull-right" %> 
-        <%= link_to "Destroy", category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger pull-right" %>
-        <%= link_to "New Sub", new_category_path(parent_id: category), class: "btn btn-sm green pull-right"%> 
+    	<%= link_to category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger pull-right" do %>
+    		<i class="fa fa-trash"></i>
+        <% end %>
+        <%= link_to edit_category_path(category), class:"btn btn-sm blue pull-right" do %>
+        	<i class="fa fa-pencil"></i> 
+        <% end %>
+        <%= link_to new_category_path(parent_id: category), class: "btn btn-sm green pull-right" do %> 
+        	<i class="fa fa-plus"></i>
+        <% end %>
   </div>
 </div>
-
 

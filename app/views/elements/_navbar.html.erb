@@ -79,17 +79,17 @@
                     </li>
                     <% @categories.each do |cat| %>
                         <% if cat.is_root? %>
-                            <li class="dropdown dropdown-fw  <%= active_nav(cat) %>">
+                            <li class="dropdown dropdown-fw  <%= active_nav(cat, "active open selected") %>">
                               <%= link_to cat.name, "#", class: "text-uppercase" %>
                               <% if cat.has_children? %>
                                 <ul class="dropdown-menu dropdown-menu-fw">
                                     <% cat.children.each do |sub| %>
-                                      <li class="dropdown <%= active_nav(sub) %> <%= 'more-dropdown-sub' if sub.has_children? %>">
+                                      <li class="dropdown <%= active_nav(sub, "active selected") %> <%= 'more-dropdown-sub' if sub.has_children? %>">
                                         <%= link_to sub.name.upcase, category_path(sub) %>
                                           <% if sub.has_children? %>
                                             <ul class="dropdown-menu">
                                               <% sub.children.each do |subsub| %>
-                                                <li class="<%= active_nav(subsub) %>" >
+                                                <li class="<%= active_nav(subsub, "active selected") %>" >
                                                   <%= link_to subsub.name, category_path(subsub) %>
                                                 </li>
                                               <% end %>

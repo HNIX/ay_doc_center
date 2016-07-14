@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   
   def show
 	@user = User.find(params[:id])
+	@documents = Document.all
+	@categories = Category.all
   end
 
 end

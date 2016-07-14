@@ -19,7 +19,7 @@
         <td><%= document.id %></td>
         <td><%= link_to document.name, document_path(document) %></td>
         <td><%= document.desc %></td>
-        <td><%= document.category.name %></td>
+        <td><%= document.category.name if document.category %></td>
         <td><%=l document.updated_at, format: :short %></td>
         <td>
           <%= link_to "Edit", edit_document_path(document), :class => 'btn green'  %>

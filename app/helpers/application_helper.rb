@@ -4,14 +4,14 @@ module ApplicationHelper
     string.gsub( /\W/, '-' )   
  end
 
- def active_nav category
+ def active_nav (category, class_name)
  	if !@category.nil?
 	 	if @category.id == category.id
-	 		@class = 'active open selected'
+	 		@class = class_name
 	 	elsif category.has_children?
 		 	category.descendants.each do |descendant|
 		      if @category.id == descendant.id 
-		        @class = 'active open selected'
+		        @class = class_name
 		        break
 		      else
 		      	@class = ""
