@@ -3,11 +3,12 @@ Rails.application.routes.draw do
 
   resources :documents do
   #->Prelang (voting/acts_as_votable)
-  member do
-    get "vote"
+    member do
+      get "vote"
+    end
   end
-end
-
+  
+  get "/pages/*id" => 'pages#show', as: :page, format: false
 
   resources :categories
 

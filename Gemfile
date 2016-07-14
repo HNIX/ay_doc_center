@@ -57,6 +57,8 @@ gem 'validates_formatting_of'
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
 gem 'rmagick'
 gem 'ancestry'
+gem 'high_voltage', '~> 3.0.0'
+gem "font-awesome-rails"
 
 group :development, :test do
   gem 'dotenv-rails'

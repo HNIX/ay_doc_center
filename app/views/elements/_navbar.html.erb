@@ -56,26 +56,24 @@
             <!-- BEGIN HEADER MENU -->
             <div class="nav-collapse collapse navbar-collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown dropdown-fw <%= 'active open selected' if params[:controller] == 'landings' %>">
+                    <li class="dropdown dropdown-fw <%= active_controller(['landings', 'pages', 'users'], "active open selected") %>">
                         <a href="javascript:;" class="text-uppercase">
                             Dashboard </a>
                         <ul class="dropdown-menu dropdown-menu-fw">
-                            <li class="active">
-                                <%= link_to "Home", root_path %>
+                            <li class="<%= active_controller(['landings'], "active") %>">
+                                <%= link_to "HOME", root_path %>
                             </li>
-                            <li>
-                                <a href="dashboard_2.html">
-                                    </i>Press</a>
+                            <li class="<%= active_for_id(['about'], "active") %>">
+                                <%= link_to 'ABOUT', page_path('about') %>
                             </li>
-                            <li>
-                                <a href="dashboard_3.html">
-                                    </i>Company News</a>
+                            <li class="<%= active_for_id(['branding'], "active") %>">
+                               <%= link_to "BRAND STANDARDS", page_path('branding') %>
                             </li>
-                            <li>
-                              <%= link_to "Directory", users_path %>
+                            <li class="<%= active_controller_action("users", ['index'], "active") %>">
+                              <%= link_to "DIRECTORY", users_path %>
                             </li>
-                            <li>
-                              <%= link_to "Admin", user_path(current_user) %>
+                            <li class="<%= active_controller_action("users", ['show'], "active") %>">
+                              <%= link_to "ADMIN", user_path(current_user) %>
                             </li>
                         </ul>
                     </li>
@@ -86,12 +84,12 @@
                               <% if cat.has_children? %>
                                 <ul class="dropdown-menu dropdown-menu-fw">
                                     <% cat.children.each do |sub| %>
-                                      <li class="dropdown <%= 'more-dropdown-sub' if sub.has_children? %>">
-                                        <%= link_to sub.name, category_path(sub) %>
+                                      <li class="dropdown <%= active_nav(sub) %> <%= 'more-dropdown-sub' if sub.has_children? %>">
+                                        <%= link_to sub.name.upcase, category_path(sub) %>
                                           <% if sub.has_children? %>
                                             <ul class="dropdown-menu">
                                               <% sub.children.each do |subsub| %>
-                                                <li>
+                                                <li class="<%= active_nav(subsub) %>" >
                                                   <%= link_to subsub.name, category_path(subsub) %>
                                                 </li>
                                               <% end %>
