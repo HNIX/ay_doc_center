@@ -15,10 +15,12 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new(:parent_id => params[:parent_id])
+    @category_tree = ancestry_options(Category.where(nil).arrange(:order => 'name')) {|i| "#{'-' * i.depth} #{i.name}" }
   end
 
   # GET /categories/1/edit
   def edit
+    @category_tree = ancestry_options(Category.where(nil).arrange(:order => 'name')) {|i| "#{'-' * i.depth} #{i.name}" }
   end
 
   # POST /categories
@@ -28,7 +30,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
+        format.html { redirect_to current_user, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
+        format.html { redirect_to current_user, notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -56,12 +58,23 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+      format.html { redirect_to current_user, notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+    def ancestry_options(items, &block)
+      return ancestry_options(items){ |i| "#{'-' * i.depth} #{i.name}" } unless block_given?
+
+      result = []
+      items.map do |item, sub_items|
+        result << [yield(item), item.id]
+        #this is a recursive call:
+        result += ancestry_options(sub_items, &block)
+      end
+      result
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])

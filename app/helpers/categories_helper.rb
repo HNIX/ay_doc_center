@@ -1,9 +1,11 @@
 module CategoriesHelper
 
 	def nested_categories(categories)
-		@count = 1
+		@count ||= 0
 		categories.map do |category, sub_categories|
-			content_tag(:li, render(category) + nested_subcategory(sub_categories), class: "dd-item", data: {id:"#{@count += 1}"})
+			content_tag(:li, class: "dd-item", data: {id:"#{@count += 1}"}) do
+				render(category) + nested_subcategory(sub_categories)
+			end
 		end.join.html_safe
 	end
 
