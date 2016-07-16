@@ -1,6 +1,25 @@
-updated docuemnt 
-<% if activity.trackable %>
-	<%= link_to activity.trackable.name, activity.trackable %> 
-<% else %>
-	which has since been removed
-<% end %>
+<li>
+	<div class="col1">
+	    <div class="cont">
+	        <div class="cont-col1">
+	            <div class="label label-sm label-info">
+	                <i class="fa fa-pencil green"></i>
+	            </div>
+	        </div>
+	        <div class="cont-col2">
+	          <% if activity.trackable %>
+	            <div class="desc"><%= link_to activity.owner.email, activity.owner if activity.owner %> updated <%= link_to activity.trackable.name, activity.trackable %> document
+	            	<%= link_to activity.trackable, class:"label label-sm label-warning" do %>
+		                    View <i class="fa fa-share"></i>
+	                <% end %>
+	            </div>
+	          <% else %>
+	            <div class="desc"><%= link_to activity.owner.email, activity.owner if activity.owner %> updated docuemnt which has since been removed</div>
+	          <% end %>
+	        </div>
+	    </div>
+	</div>
+	<div class="col2">
+	    <div class="date"><small> <%= time_ago_in_words(activity.trackable.updated_at) %> </small></div>
+	</div>
+</li>
