@@ -56,7 +56,7 @@
             <!-- BEGIN HEADER MENU -->
             <div class="nav-collapse collapse navbar-collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown dropdown-fw <%= active_controller(['landings', 'pages', 'users'], "active open selected") %>">
+                    <li class="dropdown dropdown-fw <%= active_controller(['landings', 'pages', 'users', 'documents'], "active open selected") %>">
                         <a href="javascript:;" class="text-uppercase">
                             Dashboard </a>
                         <ul class="dropdown-menu dropdown-menu-fw">
@@ -72,7 +72,7 @@
                             <li class="<%= active_controller_action("users", ['index'], "active") %>">
                               <%= link_to "DIRECTORY", users_path %>
                             </li>
-                            <li class="<%= active_controller_action("users", ['show'], "active") %>">
+                            <li class="<%= active_controller_action("users", ['show'], "active") %><%= active_controller_action("documents", ['edit'], "active") %>">
                               <%= link_to "ADMIN", user_path(current_user) %>
                             </li>
                         </ul>

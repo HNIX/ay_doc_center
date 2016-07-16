@@ -8,7 +8,13 @@
   <div class="form-group">
     <%= f.label :desc, :class => 'control-label col-md-2' %>
     <div class="col-md-10">
-      <%= f.text_area :desc, :class => 'text-field form-control' %>
+      <%= f.text_area :desc, placeholder: "Please provide a brief description of the document", :class => 'text-field form-control' %>
+    </div>
+  </div>
+   <div class="form-group">
+    <%= f.label :tag_list, "Tags", :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_area :tag_list, placeholder: "Tags seperated by commas", :class => 'text-field form-control' %>
     </div>
   </div>
   <div class="form-group">

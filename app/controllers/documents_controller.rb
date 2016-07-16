@@ -109,6 +109,6 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:user_id, :name, :desc, :is_private, :is_writable, :category_id, :attachment, :word, :ppt, :remove_attachment, :word_cache, :remove_word, :remove_ppt, :ppt_cache)
+      params.require(:document).permit(:user_id, :name, :desc, :is_private, :is_writable, :category_id, :attachment, :word, :ppt, :remove_attachment, :word_cache, :remove_word, :remove_ppt, :ppt_cache, :tag_list)
     end
 end

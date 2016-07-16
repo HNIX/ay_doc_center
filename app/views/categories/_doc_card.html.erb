@@ -10,7 +10,7 @@
                           </a>
                       </li>
                       <li>
-                          <a href="<%= document_path(doc) %>" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">Info</a>
+                          <a class="btn green" data-target="#stack<%= doc.id %>" data-toggle="modal"> Info </a>
                       </li>
                   </ul>
               </div>
@@ -23,7 +23,7 @@
   <div id="responsive<%= doc.id %>" class="modal fade" tabindex="-1" data-width="760">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Responsive</h4>
+        <h4 class="modal-title"><%= doc.name %></h4>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -37,7 +37,38 @@
         <%= link_to "Download Word", doc.word_url, class:"btn btn-outline dark" if doc.word? %>
         <%= link_to "Download PDF", doc.attachment_url, class:"btn btn-outline dark" if doc.attachment? %>
         <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
-        <%= link_to "More Information", document_path(doc), class:"btn green" if doc.attachment? %>
+        <a class="btn green" data-target="#stack<%= doc.id %>" data-dismiss="modal" data-toggle="modal"> Info </a>
     </div>
-</div>
+  </div>
+  <div id="stack<%= doc.id %>" class="modal fade" tabindex="-1" data-focus-on="input:first">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title"><%= doc.name %></h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-6">
+          <h4>Description</h4>
+          <p> <%= doc.desc %> </p>
+        </div>
+        <div class="col-md-6">
+          <h4>Turnaround</h4>
+          <p> The turnaround time for this project is:  </p>
+          <h4>Tags</h4>
+          <p><%= doc.tag_list %></p>
+        </div>
+        <div class="col-md-12">
+          <p> If you would like to request a project like this one please contact your marketing coordinator or submit a request below and someone will be in conact with you shortly. </p>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" data-tabindex="1" placeholder="Project Name"> 
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" data-tabindex="2" placeholder="Deadline"> 
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button class="btn blue" data-toggle="modal" href="#stack2">Request</button>
+          <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
+      </div>
+  </div>
 <script>PDFObject.embed("<%= doc.attachment.url %>", "#<%= no_spaces(doc.name) %><%= doc.id %>");</script>

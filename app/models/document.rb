@@ -5,4 +5,5 @@ class Document < ActiveRecord::Base
   mount_uploader :attachment, AttachmentUploader 
   mount_uploader :word, WordUploader
   mount_uploader :ppt, PptUploader
+  acts_as_taggable_on :tags
 end
