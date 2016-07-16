@@ -61,6 +61,7 @@ gem 'high_voltage', '~> 3.0.0'
 gem 'font-awesome-rails'
 gem 'jquery-turbolinks'
 gem 'acts-as-taggable-on'
+gem 'public_activity'
 
 group :development, :test do
   gem 'dotenv-rails'

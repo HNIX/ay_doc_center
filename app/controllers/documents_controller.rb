@@ -36,6 +36,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
+        @document.create_activity :create, owner: current_user
         format.html { redirect_to @document, notice: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
@@ -50,6 +51,7 @@ class DocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @document.update(document_params)
+        @document.create_activity :update, owner: current_user
         format.html { redirect_to @document, notice: 'Document was successfully updated.' }
         format.json { render :show, status: :ok, location: @document }
       else
@@ -63,6 +65,7 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1.json
   def destroy
     @document.destroy
+    @document.create_activity :destroy, owner: current_user
     respond_to do |format|
       format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
       format.json { head :no_content }
