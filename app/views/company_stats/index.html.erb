@@ -1,0 +1,31 @@
+<h1>Listing company_stats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Stat</th>
+      <th>Desc</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company_stats.each do |company_stat| %>
+      <tr>
+        <td><%= company_stat.name %></td>
+        <td><%= company_stat.stat %></td>
+        <td><%= company_stat.desc %></td>
+        <td><%= company_stat.type %></td>
+        <td><%= link_to 'Show', company_stat %></td>
+        <td><%= link_to 'Edit', edit_company_stat_path(company_stat) %></td>
+        <td><%= link_to 'Destroy', company_stat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company stat', new_company_stat_path %>

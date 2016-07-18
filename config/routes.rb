@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :company_stats
+
   get 'landings/index'
 
   resources :documents do
