@@ -62,6 +62,8 @@ gem 'font-awesome-rails'
 gem 'jquery-turbolinks'
 gem 'acts-as-taggable-on'
 gem 'public_activity'
+gem 'activeadmin', github: 'activeadmin'
+gem 'active_admin-sortable_tree'
 
 group :development, :test do
   gem 'dotenv-rails'
