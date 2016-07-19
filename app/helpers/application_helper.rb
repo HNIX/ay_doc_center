@@ -4,6 +4,10 @@ module ApplicationHelper
     string.gsub( /\W/, '-' )   
  end
 
+ def separate_comma(number)
+   number.to_s.chars.to_a.reverse.each_slice(3).map(&:join).join(",").reverse
+ end
+
  def active_nav (category, class_name)
  	if !@category.nil?
 	 	if @category.id == category.id

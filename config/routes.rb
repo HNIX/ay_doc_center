@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :company_stats
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   get 'landings/index'
 
@@ -10,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :company_stats
+
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
   resources :categories

@@ -5,16 +5,35 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   
   version :thumb do
-      process :cover
-      process :convert => :png
-  end
-
-  version :small_thumb do
     process :cover
-    process :resize_to_fill => [150, 250]
-    process :convert => :png
+    process :resize_to_fill => [150, 210]
+    process :convert => :jpg
+
+    def full_filename (for_file = model.source.file)
+      super.chomp(File.extname(super)) + '.jpg'
+    end
   end
 
+  version :thumb_big do
+     process :cover
+     process :resize_to_fill => [320, 440]
+     process :convert => :jpg
+
+     def full_filename (for_file = model.source.file)
+       super.chomp(File.extname(super)) + '.jpg'
+     end
+  end
+
+  version :normal do
+     process :cover
+     process :resize_to_fill => [450, 630]
+     process :convert => :jpg
+
+     def full_filename (for_file = model.source.file)
+       super.chomp(File.extname(super)) + '.jpg'
+     end
+  end
+  
   # Simplest way
 
   # Choose what kind of storage to use for this uploader:

@@ -77,7 +77,7 @@
                             </li>
                         </ul>
                     </li>
-                    <% @categories.each do |cat| %>
+                    <% @categories_collection.each do |cat| %>
                         <% if cat.is_root? %>
                             <li class="dropdown dropdown-fw  <%= active_nav(cat, "active open selected") %>">
                               <%= link_to cat.name, "#", class: "text-uppercase" %>

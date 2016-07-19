@@ -8,7 +8,7 @@
 	        </div>
 	        <div class="cont-col2">
 	          <% if activity.trackable %>
-	            <div class="desc"><%= link_to activity.owner.email, activity.owner if activity.owner %> updated <%= link_to activity.trackable.name, activity.trackable %> document
+	            <div class="desc"><%= link_to activity.owner.fullname, activity.owner if activity.owner %> updated <%= link_to activity.trackable.name, activity.trackable %> document
 	            	<%= link_to activity.trackable, class:"label label-sm label-warning" do %>
 		                    View <i class="fa fa-share"></i>
 	                <% end %>

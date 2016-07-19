@@ -12,6 +12,21 @@
 <!-- BEGIN PAGE BASE CONTENT -->
 <!-- BEGIN DASHBOARD STATS 1-->
 <div class="row">
+    <% @stats_collection.each do |stat| %>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+            <div class="visual">
+                <i class="fa fa-comments"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="<%= separate_comma(stat.stat) %>">0</span> SF
+                </div>
+                <div class="desc"> <%= stat.name %> </div>
+            </div>
+        </a>
+      </div>
+    <% end %>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
             <div class="visual">
@@ -47,18 +62,6 @@
                     <span data-counter="counterup" data-value="549">0</span>
                 </div>
                 <div class="desc"> Deals </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
-            <div class="visual">
-                <i class="fa fa-globe"></i>
-            </div>
-            <div class="details">
-                <div class="number"> +
-                    <span data-counter="counterup" data-value="89"></span>% </div>
-                <div class="desc"> Something </div>
             </div>
         </a>
     </div>
