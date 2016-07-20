@@ -14,9 +14,9 @@
 <div class="row">
     <% @stats_collection.each do |stat| %>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+        <a class="dashboard-stat dashboard-stat-v2 <%= stat.color ? stat.color : 'blue' %>" href="#">
             <div class="visual">
-                <i class="fa fa-comments"></i>
+                <i class="fa <%= stat.icon ? stat.icon : 'fa-bar-chart-o' %>"></i>
             </div>
             <div class="details">
                 <div class="number">
@@ -27,51 +27,13 @@
         </a>
       </div>
     <% end %>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
-            <div class="visual">
-                <i class="fa fa-comments"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    <span data-counter="counterup" data-value="1349">0</span> SF
-                </div>
-                <div class="desc"> SF Leased </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
-            <div class="visual">
-                <i class="fa fa-bar-chart-o"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    <span data-counter="counterup" data-value="12,5">0</span> M$ </div>
-                <div class="desc"> Total Profit </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
-            <div class="visual">
-                <i class="fa fa-shopping-cart"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    <span data-counter="counterup" data-value="549">0</span>
-                </div>
-                <div class="desc"> Deals </div>
-            </div>
-        </a>
-    </div>
 </div>
 <div class="clearfix"></div>
 <!-- END DASHBOARD STATS 1-->
 <div class="row">
       <div class="col-md-6 col-sm-6">
         <!-- BEGIN PORTLET-->
-                        <div class="portlet light portlet-fit bordered">
+          <div class="portlet light portlet-fit bordered">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-microphone font-dark hide"></i>
@@ -79,55 +41,48 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <div class="mt-element-card mt-element-overlay">
                   <div class="row">
-                    <% @documents.each do |doc| %>
+                    <% @documents.each do |document| %>
                       <div class="col-md-4">
-                        <div class="mt-card-item">
-                          <div class="mt-card-content">
-                              <h3 class="mt-card-name"><%= doc.name %></h3>
-                          </div>
-                          <div class="mt-card-avatar mt-overlay-1">
-                              <%= image_tag(doc.attachment.small_thumb.url) if doc.attachment? %>
-                              <div class="mt-overlay">
-                                  <ul class="mt-info">
-                                      <li>
-                                          <a class="btn blue" data-toggle="modal" href="#responsive<%= doc.id %>">
-                                              View
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="<%= document_path(doc) %>" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">Info</a>
-                                      </li>
-                                  </ul>
+                        <a data-toggle="modal" href="#responsive<%= document.id %>">
+                          <div class="mt-widget-4">
+                              <div class="mt-img-container">
+                                  <%= image_tag(document.attachment.thumb.url) if document.attachment? %></div>
+                              <div class="mt-container bg-dark-opacity">
+                                  <div class="mt-head-title"> <%= document.name %> </div>
+                                  <div class="mt-body-icons">
+                                      
+                                  </div>
+                                  <div class="mt-footer-button">
+                                      <button type="button" class="btn btn-circle btn-success btn-sm"><%= document.category.name %></button>
+                                  </div>
                               </div>
                           </div>
-                        </div>
+                        </a>
                       </div>
-                      <div id="responsive<%= doc.id %>" class="modal fade" tabindex="-1" data-width="760">
+                      <div id="responsive<%= document.id %>" class="modal fade" tabindex="-1" data-width="760">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             <h4 class="modal-title">Responsive</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div id="<%= no_spaces(doc.name) %><%= doc.id %>" class="col-md-6">
+                                <div id="<%= no_spaces(document.name) %><%= document.id %>" class="col-md-6">
                                     
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <%= link_to "Download PowerPoint", doc.ppt_url, class:"btn btn-outline dark" if doc.ppt? %>
-                            <%= link_to "Download Word", doc.word_url, class:"btn btn-outline dark" if doc.word? %>
-                            <%= link_to "Download PDF", doc.attachment_url, class:"btn btn-outline dark" if doc.attachment? %>
+                            <%= link_to "Download PowerPoint", document.ppt_url, class:"btn btn-outline dark" if document.ppt? %>
+                            <%= link_to "Download Word", document.word_url, class:"btn btn-outline dark" if document.word? %>
+                            <%= link_to "Download PDF", document.attachment_url, class:"btn btn-outline dark" if document.attachment? %>
                             <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
-                            <%= link_to "More Information", document_path(doc), class:"btn green" if doc.attachment? %>
+                            <%= link_to "More Information", document_path(document), class:"btn green" if document.attachment? %>
                         </div>
                       </div>
-                      <script>PDFObject.embed("<%= doc.attachment.url %>", "#<%= no_spaces(doc.name) %><%= doc.id %>");</script>
+                      <script>PDFObject.embed("<%= document.attachment.url %>", "#<%= no_spaces(document.name) %><%= document.id %>");</script>
                     <% end %>
-                    </div>
-                  </div>
+                </div>
             </div>
         </div>
         <!-- END PORTLET-->
