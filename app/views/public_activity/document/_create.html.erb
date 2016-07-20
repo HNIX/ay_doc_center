@@ -8,10 +8,7 @@
 	        </div>
 	        <div class="cont-col2">
 	          <% if activity.trackable %>
-	            <div class="desc"><%= link_to activity.owner.fullname, activity.owner if activity.owner %> added <%= link_to activity.trackable.name, activity.trackable %> to <%= activity.trackable.category.name %>
-	            	<%= link_to activity.trackable, class:"label label-sm label-warning" do %>
-		                    View <i class="fa fa-share"></i>
-	                <% end %>
+	            <div class="desc">A new document has been added: <%= link_to activity.trackable.name, activity.trackable %> to <%= activity.trackable.category.name %>
 	            </div>
 	          <% else %>
 	            <div class="desc"><%= link_to activity.owner.email, activity.owner if activity.owner %> added a docuemnt which has since been removed</div>

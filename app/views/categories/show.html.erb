@@ -12,7 +12,7 @@
               <div class="mt-element-card mt-element-overlay">
                   <div class="row">
                     <% Document.where(category_id: @category.id).each do |doc| %>
-                      <%= render partial: "doc_card", :locals => {doc: doc} %>
+                      <%= render partial: "elements/doc_card", :locals => {doc: doc} %>
                     <% end %>
                     <% if @category.has_children? %>
                       <% @category.descendants.each do |descendant| %>

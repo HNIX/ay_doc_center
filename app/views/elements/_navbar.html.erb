@@ -17,35 +17,36 @@
                 <%= link_to image_tag("AY_Reverse.png"), defined?(root_path) ? root_path : "#", class: "page-logo" %>
                 <!-- END LOGO -->
                 <!-- BEGIN SEARCH -->
-                <form class="search" action="extra_search.html" method="GET">
-                    <input type="name" class="form-control" name="query" placeholder="Search...">
-                    <a href="javascript:;" class="btn submit md-skip">
-                        <i class="fa fa-search"></i>
-                    </a>
-                </form>
+                <%= form_tag(documents_path, :method => "get", id: "search-form", class: "search") do %>
+                  <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class: "form-control" %>
+                  <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                      <i class="fa fa-search"></i>
+                  <% end %>
+                <% end %>
                 <!-- END SEARCH -->
                 <!-- BEGIN TOPBAR ACTIONS -->
                 <div class="topbar-actions">
                     <!-- BEGIN USER PROFILE -->
-                    <div class="btn-group-img btn-group">
+                    
                       <% if defined?(Devise) %>
                         <% if user_signed_in? %>
-                          <button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                              <span>Account</span>
-                          </button>
-                          <ul class="dropdown-menu-v2" role="menu">
-                              <li>
-                                  <%= link_to "My Profile", edit_user_registration_path %>
-                              </li>
-                              <li>
-                                  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-                              </li>
-                          </ul>
+                          <div class="btn-group-img btn-group">
+                            <button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <span>Account</span>
+                            </button>
+                            <ul class="dropdown-menu-v2" role="menu">
+                                <li>
+                                    <%= link_to "My Profile", edit_user_registration_path %>
+                                </li>
+                                <li>
+                                    <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+                                </li>
+                            </ul>
+                          </div>
                         <% else %>
-                          <%= link_to "Login", new_user_session_path, class: "btn btn-sm blue" %>
+                          <%= link_to "Login", new_user_session_path, class: "btn btn-solic blue" %>
                         <% end %>
                       <% end %>
-                    </div>
                     <!-- END USER PROFILE -->
                 </div>
                 <!-- END TOPBAR ACTIONS -->

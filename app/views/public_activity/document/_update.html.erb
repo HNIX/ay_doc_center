@@ -8,13 +8,10 @@
 	        </div>
 	        <div class="cont-col2">
 	          <% if activity.trackable %>
-	            <div class="desc"><%= link_to activity.owner.fullname, activity.owner if activity.owner %> updated <%= link_to activity.trackable.name, activity.trackable %> document
-	            	<%= link_to activity.trackable, class:"label label-sm label-warning" do %>
-		                    View <i class="fa fa-share"></i>
-	                <% end %>
+	            <div class="desc"><%= link_to activity.trackable.name, activity.trackable %> was updated
 	            </div>
 	          <% else %>
-	            <div class="desc"><%= link_to activity.owner.email, activity.owner if activity.owner %> updated docuemnt which has since been removed</div>
+	            <div class="desc">A document was updated which has since been removed</div>
 	          <% end %>
 	        </div>
 	    </div>

@@ -22,18 +22,39 @@ class CompanyStatsController < ApplicationController
 
   def create
     @company_stat = CompanyStat.new(company_stat_params)
-    @company_stat.save
-    respond_with(@company_stat)
+    
+    respond_to do |format|
+      if @company_stat.save
+        @company_stat.create_activity :create, owner: current_user
+        format.html { redirect_to @company_stat, notice: 'Stat was successfully created.' }
+        format.json { render :show, status: :created, location: @company_stat }
+      else
+        format.html { render :new }
+        format.json { render json: @company_stat.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
-    @company_stat.update(company_stat_params)
-    respond_with(@company_stat)
+    respond_to do |format|
+      if @company_stat.update(company_stat_params)
+        @company_stat.create_activity :update, owner: current_user
+        format.html { redirect_to @company_stat, notice: 'Stat was successfully updated.' }
+        format.json { render :show, status: :ok, location: @company_stat }
+      else
+        format.html { render :edit }
+        format.json { render json: @company_stat.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
     @company_stat.destroy
-    respond_with(@company_stat)
+    @company_stat.create_activity :destroy, owner: current_user
+    respond_to do |format|
+      format.html { redirect_to company_stats_url, notice: 'Stat was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private

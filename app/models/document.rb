@@ -12,4 +12,10 @@ class Document < ActiveRecord::Base
   mount_uploader :ppt, PptUploader
 
   acts_as_taggable_on :tags
+
+
+  def self.search(search)
+	  where("name ILIKE ?", "%#{search}%") 
+  end
+
 end

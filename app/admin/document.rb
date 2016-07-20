@@ -6,6 +6,16 @@ ActiveAdmin.register Document do
   filter :name
   filter :category
   
+  controller do
+    # This code is evaluated within the controller class
+    def update
+      update! do |format|
+        @document.create_activity :update
+      end
+    end
+  end
+
+
   index as: :grid, columns: 4 do |document|
     div do
       a :href => admin_document_path(document) do
@@ -20,7 +30,11 @@ ActiveAdmin.register Document do
     attributes_table do
       row :name
       row :category do |document|
-        document.category.parent.name + " > " + document.category.name 
+        if document.category.parent
+          document.category.parent.name + " > " + document.category.name 
+        else
+          document.category.name
+        end
       end
       row :desc, label: "Description"
       row :attachment
