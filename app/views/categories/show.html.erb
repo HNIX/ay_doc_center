@@ -17,7 +17,7 @@
                     <% if @category.has_children? %>
                       <% @category.descendants.each do |descendant| %>
                         <% Document.where(category_id: descendant.id).each do |doc| %>
-                          <%= render partial: "doc_card", :locals => {doc: doc} %>
+                          <%= render partial: "elements/doc_card", :locals => {doc: doc} %>
                         <% end %> 
                       <% end %> 
                     <% end %>

@@ -1,10 +1,10 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  
+  load_and_authorize_resource
 
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
   end
 
   # GET /categories/1
@@ -26,8 +26,6 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    @category = Category.new(category_params)
-
     respond_to do |format|
       if @category.save
         format.html { redirect_to current_user, notice: 'Category was successfully created.' }
@@ -74,10 +72,6 @@ class CategoriesController < ApplicationController
         result += ancestry_options(sub_items, &block)
       end
       result
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

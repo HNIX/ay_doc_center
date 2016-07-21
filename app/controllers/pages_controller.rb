@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
+  authorize_resource :class => false
   before_filter :validate_page
-
+  
   include HighVoltage::StaticPage
 
   layout :layout_for_page

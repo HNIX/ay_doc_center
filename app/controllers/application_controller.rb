@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
 
+  layout :layout
+   
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to new_user_session_path, :alert => exception.message
+  end
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -8,6 +14,13 @@ class ApplicationController < ActionController::Base
 
   private
   
+  def layout
+    # only turn it off for login pages:
+    is_a?(Devise::SessionsController) ? false : "application"
+    # or turn layout off for every devise controller:
+    # devise_controller? && "application"
+  end
+
   #-> Prelang (user_login:devise)
   def set_categories
     @categories_collection = ::Category.all

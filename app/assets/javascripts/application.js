@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require jquery-fileupload/basic
 //= require plugins/js.cookie.min
 //= require plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min
 //= require plugins/jquery-slimscroll/jquery.slimscroll.min
@@ -46,4 +47,5 @@
 //= require plugins/PDFObject/pdfobject
 //= require plugins/jquery-nestable/jquery.nestable
 //= require ui-nestable.min
+
 

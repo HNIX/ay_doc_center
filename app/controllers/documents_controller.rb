@@ -1,14 +1,10 @@
 class DocumentsController < ApplicationController
 
-  #->Prelang (scaffolding:rails/scope_to_user)
-  before_filter :require_user_signed_in, only: [:new, :edit, :create, :update, :destroy]
-
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :vote]
+  load_and_authorize_resource
 
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
     if params[:search]
       @documents = Document.search(params[:search]).order("created_at DESC")
     else
@@ -24,7 +20,6 @@ class DocumentsController < ApplicationController
 
   # GET /documents/new
   def new
-    @document = Document.new
     @categories_doc = ancestry_options(Category.where(nil).arrange(:order => 'name')) {|i| "#{'-' * i.depth} #{i.name}" }
   end
 
@@ -36,9 +31,7 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(document_params)
     @document.user = current_user
-
     respond_to do |format|
       if @document.save
         @document.create_activity :create, owner: current_user
@@ -109,11 +102,7 @@ class DocumentsController < ApplicationController
         result += ancestry_options(sub_items, &block)
       end
       result
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_document
-      @document = Document.find(params[:id])
-    end
+    end  
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params

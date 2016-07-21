@@ -5,6 +5,14 @@ class User < ActiveRecord::Base
         :recoverable, :rememberable, :trackable, :validatable
   has_many :documents
 
+  def admin?
+    role == "admin"
+  end
+
+  def  regular?
+    role == "regular"
+  end
+
   def fullname
   	if self.first_name && self.last_name
       self.first_name + " " + self.last_name

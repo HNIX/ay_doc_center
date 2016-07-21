@@ -1,5 +1,6 @@
 class LandingsController < ApplicationController
-  
+  authorize_resource :class => false
+
   before_filter :set_documents
   before_filter :set_stats
 

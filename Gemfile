@@ -64,6 +64,9 @@ gem 'acts-as-taggable-on'
 gem 'public_activity'
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_admin-sortable_tree'
+gem 'remotipart', '~> 1.2'
+gem 'jquery-fileupload-rails'
+gem 'cancancan', '~> 1.10'
 
 group :development, :test do
   gem 'dotenv-rails'

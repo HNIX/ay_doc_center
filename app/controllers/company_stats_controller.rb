@@ -1,29 +1,22 @@
 class CompanyStatsController < ApplicationController
-  before_action :set_company_stat, only: [:show, :edit, :update, :destroy]
-
-  respond_to :html
+  load_and_authorize_resource
 
   def index
-    @company_stats = CompanyStat.all
-    respond_with(@company_stats)
+
   end
 
   def show
-    respond_with(@company_stat)
   end
 
   def new
-    @company_stat = CompanyStat.new
-    respond_with(@company_stat)
+
   end
 
   def edit
   end
 
   def create
-    @company_stat = CompanyStat.new(company_stat_params)
-    
-    respond_to do |format|
+      respond_to do |format|
       if @company_stat.save
         @company_stat.create_activity :create, owner: current_user
         format.html { redirect_to @company_stat, notice: 'Stat was successfully created.' }
@@ -58,10 +51,6 @@ class CompanyStatsController < ApplicationController
   end
 
   private
-    def set_company_stat
-      @company_stat = CompanyStat.find(params[:id])
-    end
-
     def company_stat_params
       params.require(:company_stat).permit(:name, :stat, :desc, :type)
     end
