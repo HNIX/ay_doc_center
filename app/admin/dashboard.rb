@@ -20,7 +20,7 @@ ActiveAdmin.register_page "Dashboard" do
           column do
             panel "Recent Users" do
               table_for User.order('created_at DESC').limit(5) do |user|
-                column("Name")   {|user| link_to(user.first_name + " " + user.last_name, admin_user_path(user))}
+                column("Name")   {|user| link_to(user.first_name + " " + user.last_name, admin_user_path(user)) if user.first_name && user.last_name}
                 column("Title") {|user| user.title}
                 column("Email") {|user| user.email}
               end

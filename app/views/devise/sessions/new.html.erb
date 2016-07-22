@@ -1,44 +1,83 @@
-<div class="page-header">
-  <h1><%=t ".title", default: "Login" %></h1>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Avison Young | User Login</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <%= stylesheet_link_tag    'sign_in', media: 'all', 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
+    </head>
+    <!-- END HEAD -->
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal form-user"}) do |f| %>
-                                                                                                                                        
-  
-  <div class="form-group">
-    <%= f.label :email, class: "control-label col-md-4" %>
-    <div class="col-md-8">
-      <%= f.email_field :email, class: "text-field form-control", html: {spellcheck: "false"} %>
-    </div>
-  </div>
-  
-
-  <div class="form-group">
-    <%= f.label :password, class: "control-label col-md-4" %>
-    <div class="col-md-8">
-      <%= f.password_field :password, class: "text-field form-control", html: {autocomplete: "off"} %>
-    </div>
-  </div>
-                                                                                                                                        
-  <% if devise_mapping.rememberable? -%>
-    <div class="form-group">
-      <%= f.label :remember_me, "Remember Me", class: "control-label col-md-4" %>
-      <div class="col-md-8">
-        <%= f.check_box :remember_me %>
-      </div>
-    </div>
-  <% end -%>
-                                                                                                                                        
-  <div class="form-group">
-    <div class="col-md-offset-4 col-md-8">
-      <%= f.submit "Login", class: "btn btn-primary" %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-md-offset-4 col-md-8">
-      <%= render "devise/shared/links" %>
-    </div>
-  </div>
-
-<% end %>
+    <body class=" login">
+        <!-- BEGIN : LOGIN PAGE 5-1 -->
+        <div class="user-login-5">
+            <div class="row bs-reset">
+                <div class="col-md-6 bs-reset">
+                    <div class="login-bg" style="background-image:url(../assets/pages/img/login/bg1.jpg)">
+                        <img class="login-logo" src="../assets/pages/img/login/logo.png" /> </div>
+                </div>
+                <div class="col-md-6 login-container bs-reset">
+                    <div class="login-content">
+                        <%= bootstrap_flash %>
+                        <h1>Avison Young Login</h1>
+                        <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
+                        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "login-form"}) do |f| %>
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                <span>Enter any username and password. </span>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <%= f.email_field :email, class: "form-control form-control-solid placeholder-no-fix form-group", placeholder: "Username or email", html: {spellcheck: "false"} %>
+                                </div>
+                                <div class="col-xs-6">
+                                    <%= f.password_field :password, class: "form-control form-control-solid placeholder-no-fix form-group", placeholder: "Password", html: {autocomplete: "off"} %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <% if devise_mapping.rememberable? -%>
+                                      <div class="rem-password">
+                                        <%= f.label :remember_me, "Remember Me", class: "rememberme mt-checkbox mt-checkbox-outline" do %>
+                                          <%= f.check_box :remember_me %> Remember me
+                                          <span></span>
+                                        <% end %>
+                                      </div>
+                                    <% end -%>
+                                </div>
+                                <div class="col-sm-8 text-right">
+                                    <div class="forgot-password">
+                                      <%= render "devise/shared/links" %>
+                                    </div>
+                                    <%= f.submit "Sign In", class: "btn green" %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                    <div class="login-footer">
+                        <div class="row bs-reset">
+                            <div class="col-xs-5 bs-reset">
+                                
+                            </div>
+                            <div class="col-xs-7 bs-reset">
+                                <div class="login-copyright text-right">
+                                <p class="copyright"><%= Date.today.year %> © 
+                                      <a href="http://Avisonyoung.com" title="Avison Young Website" target="_blank">Avison Young</a>
+                                </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END : LOGIN PAGE 5-1 -->
+        <!--[if lt IE 9]>
+<script src="../assets/global/plugins/respond.min.js"></script>
+<script src="../assets/global/plugins/excanvas.min.js"></script> 
+<![endif]-->
+        <%= javascript_include_tag 'sign_in', 'data-turbolinks-track' => true %>
+    </body>
+</html>

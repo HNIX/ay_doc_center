@@ -47,5 +47,9 @@
 //= require plugins/PDFObject/pdfobject
 //= require plugins/jquery-nestable/jquery.nestable
 //= require ui-nestable.min
-
-
+//= require plugins/jquery-validation/js/jquery.validate.min
+//= require plugins/jquery-validation/js/additional-methods.min
+//= require plugins/select2/js/select2.full.min
+//= require plugins/backstretch/jquery.backstretch.min
+//= require login-5.min
+ 

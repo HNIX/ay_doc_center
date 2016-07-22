@@ -2,11 +2,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   include ApplicationHelper
 
   def create
-    super
+    flash[:info] = 'Registrations are not open'
+    redirect_to new_user_session_path
   end
 
   def new
-    super
+    flash[:info] = 'Registrations are not open'
+    redirect_to new_user_session_path
   end
 
   def edit

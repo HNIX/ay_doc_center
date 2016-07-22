@@ -10,7 +10,6 @@
 * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
 * file per style scope.
 *
-*= require_tree .
 *= require_self
 */
 @import "bootstrap_configuration";
@@ -52,7 +51,9 @@
 @import "profile-2.min";
 @import "plugins/jquery-nestable/jquery.nestable";
 @import "font-awesome";
-
+@import "login-5.min";
+@import "plugins/select2/css/select2.min";
+@import "plugins/select2/css/select2-bootstrap.min";
 
 .dd-handle {
 	height: 42px;
