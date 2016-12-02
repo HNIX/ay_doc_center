@@ -15,7 +15,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
-    
+
   end
 
   # GET /documents/new
@@ -62,8 +62,8 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
-    @document.destroy
     @document.create_activity :destroy, owner: current_user
+    @document.destroy
     respond_to do |format|
       format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
       format.json { head :no_content }
@@ -102,7 +102,7 @@ class DocumentsController < ApplicationController
         result += ancestry_options(sub_items, &block)
       end
       result
-    end  
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params

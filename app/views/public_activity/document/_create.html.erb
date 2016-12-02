@@ -17,6 +17,8 @@
 	    </div>
 	</div>
 	<div class="col2">
+		<% if activity.trackable %>
 	    <div class="date"><small> <%= time_ago_in_words(activity.trackable.updated_at) %> </small></div>
+		<% end %> 
 	</div>
 </li>

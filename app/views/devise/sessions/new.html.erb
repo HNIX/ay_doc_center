@@ -15,8 +15,9 @@
         <div class="user-login-5">
             <div class="row bs-reset">
                 <div class="col-md-6 bs-reset">
-                    <div class="login-bg" style="background-image:url(../assets/pages/img/login/bg1.jpg)">
-                        <img class="login-logo" src="../assets/pages/img/login/logo.png" /> </div>
+                    <div class="login-bg">
+                        <%= image_tag 'AY_RGB_Tagline.png', class:"login-logo" %>
+                    </div>
                 </div>
                 <div class="col-md-6 login-container bs-reset">
                     <div class="login-content">
@@ -59,11 +60,11 @@
                     <div class="login-footer">
                         <div class="row bs-reset">
                             <div class="col-xs-5 bs-reset">
-                                
+
                             </div>
                             <div class="col-xs-7 bs-reset">
                                 <div class="login-copyright text-right">
-                                <p class="copyright"><%= Date.today.year %> © 
+                                <p class="copyright"><%= Date.today.year %> ©
                                       <a href="http://Avisonyoung.com" title="Avison Young Website" target="_blank">Avison Young</a>
                                 </p>
                                 </div>
@@ -76,7 +77,7 @@
         <!-- END : LOGIN PAGE 5-1 -->
         <!--[if lt IE 9]>
 <script src="../assets/global/plugins/respond.min.js"></script>
-<script src="../assets/global/plugins/excanvas.min.js"></script> 
+<script src="../assets/global/plugins/excanvas.min.js"></script>
 <![endif]-->
         <%= javascript_include_tag 'sign_in', 'data-turbolinks-track' => true %>
     </body>

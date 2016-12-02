@@ -3,15 +3,14 @@
 	    <div class="cont">
 	        <div class="cont-col1">
 	            <div class="label label-sm label-info">
-	                <i class="fa fa-pencil green"></i>
+	                <i class="fa fa-plus"></i>
 	            </div>
 	        </div>
 	        <div class="cont-col2">
 	          <% if activity.trackable %>
-	            <div class="desc"><%= link_to activity.trackable.name, activity.trackable %> was updated
-	            </div>
+	            <div class="desc">A new company stat has been added: <%= link_to activity.trackable.name, activity.trackable %></div>
 	          <% else %>
-	            <div class="desc">A document was updated which has since been removed</div>
+	            <div class="desc"><%= link_to activity.owner.email, activity.owner if activity.owner %> added a stat which has since been removed</div>
 	          <% end %>
 	        </div>
 	    </div>
@@ -19,6 +18,6 @@
 	<div class="col2">
 		<% if activity.trackable %>
 	    <div class="date"><small> <%= time_ago_in_words(activity.trackable.updated_at) %> </small></div>
-		<% end %> 
+		<% end %>
 	</div>
 </li>

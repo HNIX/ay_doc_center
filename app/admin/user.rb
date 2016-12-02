@@ -22,7 +22,7 @@ ActiveAdmin.register User do
   index do
   	selectable_column
     column :name do |user|
-      link_to user.first_name + " " + user.last_name, admin_user_path(user)
+      link_to "#{user.first_name}  #{user.last_name}", admin_user_path(user)
     end
     column :title
     column :email
@@ -43,7 +43,7 @@ ActiveAdmin.register User do
       row :mobile_phone
     end
   end
-  
+
 
   form do |f|
     f.inputs "User Details" do
@@ -60,10 +60,3 @@ ActiveAdmin.register User do
   end
 
 end
-
-
-
-
-
-  
- 
