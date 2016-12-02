@@ -1,4 +1,4 @@
-<%= form_for @document, :html => { :class => 'form-horizontal form-model' }) do |f| %>
+<%= form_for @document, :html => { :class => 'form-horizontal form-model' } do |f| %>
   <div class="form-group">
     <%= f.label :name, :class => 'control-label col-md-2' %>
     <div class="col-md-10">
@@ -29,7 +29,7 @@
       <%= f.file_field :attachment, :class => 'text-field form-control' %>
     </div>
     <div class="col-md-5">
-      <% if @document.attachment? %> 
+      <% if @document.attachment? %>
         <%= f.check_box :remove_attachment %>
         Remove <%= truncate @document.attachment.file.filename, length: 30 %>
       <% end %>
@@ -42,7 +42,7 @@
       <%= f.hidden_field :word_cache %>
     </div>
     <div class="col-md-5">
-      <% if @document.word? %> 
+      <% if @document.word? %>
         <%= f.check_box :remove_word %>
         Remove <%= truncate @document.word.file.filename, length: 30 %>
       <% end %>
@@ -55,7 +55,7 @@
       <%= f.hidden_field :ppt_cache %>
     </div>
     <div class="col-md-5">
-      <% if @document.ppt? %> 
+      <% if @document.ppt? %>
         <%= f.check_box :remove_ppt %>
         Remove <%= truncate @document.ppt.file.filename, length: 30 %>
       <% end %>
