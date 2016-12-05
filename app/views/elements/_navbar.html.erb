@@ -24,7 +24,7 @@
                 <!-- BEGIN TOPBAR ACTIONS -->
                 <div class="topbar-actions">
                     <!-- BEGIN USER PROFILE -->
-                    
+
                       <% if defined?(Devise) %>
                         <% if user_signed_in? %>
                           <div class="btn-group-img btn-group">
@@ -58,17 +58,14 @@
                             <li class="<%= active_controller(['landings'], "active") %>">
                                 <%= link_to "HOME", root_path %>
                             </li>
-                            <li class="<%= active_for_id(['about'], "active") %>">
+                            <!-- <li class="<%= active_for_id(['about'], "active") %>">
                                 <%= link_to 'ABOUT', page_path('about') %>
-                            </li>
-                            <li class="<%= active_for_id(['branding'], "active") %>">
-                               <%= link_to "BRAND STANDARDS", page_path('branding') %>
-                            </li>
+                            </li> -->
                             <li class="<%= active_controller_action("users", ['index'], "active") %>">
                               <%= link_to "DIRECTORY", users_path %>
                             </li>
                             <li class="<%= active_controller_action("users", ['show'], "active") %><%= active_controller_action("documents", ['edit'], "active") %>">
-                              <%= link_to "ADMIN", user_path(current_user) if current_user %>
+                              <%= link_to "ADMIN", user_path(current_user) if current_user.role == "admin" %>
                             </li>
                         </ul>
                     </li>
